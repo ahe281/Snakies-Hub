@@ -211,6 +211,19 @@ header {
   font-weight: 700;
   margin-bottom: 40px;
   letter-spacing: -1px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
 }
 
 .product-grid {
@@ -273,8 +286,8 @@ header {
 
 .add-btn {
   padding: 10px 24px;
-  background: var(--text);
-  color: white;
+  background: var(--primary);
+  color: #000;
   border: none;
   border-radius: 50px;
   font-size: 14px;
@@ -285,8 +298,8 @@ header {
 
 .add-btn:hover {
   background: var(--primary-dark);
-  color: var(--text);
   transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
 }
 
 /* Modal */
@@ -340,9 +353,28 @@ header {
   align-items: center;
 }
 
-.modal-title {
-  font-size: 24px;
-  font-weight: 700;
+.modal-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.modal-tab {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+  color: var(--text-light);
+}
+
+.modal-tab.active {
+  color: var(--text);
+  background: var(--card-bg);
+}
+
+.modal-tab:hover {
+  color: var(--text);
 }
 
 .close-btn {
@@ -379,6 +411,56 @@ header {
   font-size: 64px;
   margin-bottom: 16px;
   opacity: 0.3;
+}
+
+.order-success {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.order-success-icon {
+  font-size: 80px;
+  margin-bottom: 16px;
+}
+
+.order-success h3 {
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: var(--success);
+}
+
+.order-success p {
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+.order-info-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.order-info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.order-info-row:last-child {
+  border-bottom: none;
+}
+
+.order-info-label {
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.order-info-value {
+  font-weight: 600;
 }
 
 .cart-item {
@@ -515,21 +597,56 @@ input:focus, select:focus {
 .primary-btn {
   width: 100%;
   padding: 16px;
-  background: var(--text);
-  color: white;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: #000;
   border: none;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.primary-btn:hover::before {
+  left: 100%;
 }
 
 .primary-btn:hover {
-  background: var(--primary-dark);
-  color: var(--text);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px var(--shadow);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+}
+
+.secondary-btn {
+  width: 100%;
+  padding: 16px;
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 12px;
+}
+
+.secondary-btn:hover {
+  border-color: var(--error);
+  color: var(--error);
+  background: rgba(255, 68, 102, 0.1);
 }
 
 /* Admin Login */
@@ -547,53 +664,100 @@ input:focus, select:focus {
   margin-bottom: 32px;
 }
 
+.admin-login input {
+  background: var(--bg-light);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
 /* Admin Panel */
 .admin-header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 40px 0;
+  padding: 60px 0;
   margin-bottom: 40px;
+  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.admin-header::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -5%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.admin-header .container {
+  position: relative;
+  z-index: 1;
 }
 
 .admin-title {
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  letter-spacing: -1px;
 }
 
 .admin-subtitle {
-  opacity: 0.9;
-  font-size: 16px;
+  opacity: 0.95;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .admin-actions {
   display: flex;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 32px;
   flex-wrap: wrap;
 }
 
 .admin-btn {
-  padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.2);
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.15);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
   backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .admin-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.admin-btn:active {
+  transform: translateY(0);
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 24px;
   margin-bottom: 48px;
 }
@@ -601,132 +765,196 @@ input:focus, select:focus {
 .stat-card {
   background: white;
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
+  border-radius: 20px;
+  padding: 32px 24px;
   text-align: center;
   transition: all 0.3s;
+  color: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.stat-card:hover::before {
+  transform: scaleX(1);
 }
 
 .stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px var(--shadow);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+  border-color: #667eea;
 }
 
 .stat-value {
-  font-size: 36px;
+  font-size: 42px;
   font-weight: 700;
   margin-bottom: 8px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
 }
 
 .stat-label {
-  color: var(--text-light);
-  font-size: 14px;
-  font-weight: 500;
+  color: #666;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .order-card {
   background: white;
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 16px;
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 20px;
   transition: all 0.3s;
+  color: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.order-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #667eea, #764ba2);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.order-card:hover::before {
+  opacity: 1;
 }
 
 .order-card:hover {
-  box-shadow: 0 8px 24px var(--shadow);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+  transform: translateX(4px);
 }
 
 .order-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 20px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
 }
 
 .order-id {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
+  color: #667eea;
 }
 
 .order-time {
-  color: var(--text-light);
+  color: #999;
   font-size: 14px;
-  margin-top: 4px;
+  margin-top: 6px;
+  font-weight: 500;
 }
 
 .order-status {
-  padding: 6px 12px;
+  padding: 8px 16px;
   border-radius: 50px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .order-status.pending {
-  background: #fff3e0;
-  color: #f57c00;
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+  color: #e65100;
+  border: 2px solid #ffb74d;
 }
 
 .order-status.completed {
-  background: #e8f5e9;
-  color: var(--success);
+  background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+  color: #2e7d32;
+  border: 2px solid #66bb6a;
 }
 
 .order-details {
   display: grid;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 14px;
+  margin-bottom: 24px;
 }
 
 .detail-row {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 15px;
+  padding: 8px 0;
 }
 
 .detail-label {
-  color: var(--text-light);
+  color: #666;
+  font-weight: 500;
+}
+
+.detail-value {
+  font-weight: 600;
+  color: #000;
+  text-align: right;
 }
 
 .order-actions {
   display: flex;
-  gap: 8px;
+  gap: 12px;
 }
 
 .order-actions button {
   flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .complete-btn {
-  background: var(--success);
+  background: linear-gradient(135deg, #00ff88, #00cc73);
   color: white;
   border: none;
+  box-shadow: 0 4px 12px rgba(0, 255, 136, 0.3);
 }
 
 .complete-btn:hover {
-  background: #00A041;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 255, 136, 0.4);
 }
 
 .delete-btn {
   background: white;
   color: var(--error);
-  border: 1px solid var(--error);
+  border: 2px solid var(--error);
 }
 
 .delete-btn:hover {
   background: var(--error);
   color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 68, 102, 0.3);
 }
 
 /* Toast */
@@ -763,6 +991,35 @@ input:focus, select:focus {
   font-size: 20px;
 }
 
+.notification-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, var(--success) 0%, #00cc73 100%);
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  font-weight: 600;
+  z-index: 10000;
+  animation: slideDown 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+.notification-bar.hiding {
+  animation: slideUp 0.3s ease forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+
 footer {
   text-align: center;
   padding: 40px 0;
@@ -797,7 +1054,6 @@ footer {
 <canvas id="stars-canvas"></canvas>
 
 <script type="module">
-// Initialize 3D Parallax Stars
 const canvas = document.getElementById('stars-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -821,14 +1077,12 @@ class Star {
   }
 
   update() {
-    // Parallax effect based on mouse position
     const parallaxX = (mouseX - canvas.width / 2) * 0.01;
     const parallaxY = (mouseY - canvas.height / 2) * 0.01;
     
     this.x += this.speedX + (parallaxX * (1000 - this.z) / 1000);
     this.y += this.speedY + (parallaxY * (1000 - this.z) / 1000);
     
-    // Wrap around screen
     if (this.x < 0) this.x = canvas.width;
     if (this.x > canvas.width) this.x = 0;
     if (this.y < 0) this.y = canvas.height;
@@ -843,7 +1097,6 @@ class Star {
     ctx.beginPath();
     ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
     
-    // Gold tint for some stars
     if (Math.random() > 0.95) {
       ctx.fillStyle = `rgba(255, 215, 0, ${opacity})`;
     } else {
@@ -852,7 +1105,6 @@ class Star {
     
     ctx.fill();
     
-    // Twinkle effect
     if (Math.random() > 0.98) {
       ctx.shadowBlur = 10;
       ctx.shadowColor = 'rgba(255, 215, 0, 0.8)';
@@ -862,7 +1114,7 @@ class Star {
   }
 }
 
-function init() {
+function initStars() {
   resizeCanvas();
   stars = [];
   for (let i = 0; i < 200; i++) {
@@ -870,15 +1122,13 @@ function init() {
   }
 }
 
-function animate() {
+function animateStars() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
   stars.forEach(star => {
     star.update();
     star.draw();
   });
-  
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animateStars);
 }
 
 document.addEventListener('mousemove', (e) => {
@@ -887,11 +1137,9 @@ document.addEventListener('mousemove', (e) => {
 });
 
 window.addEventListener('resize', resizeCanvas);
+initStars();
+animateStars();
 
-init();
-animate();
-
-// Firebase and app code below
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
 import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, onSnapshot, query, orderBy, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
@@ -909,7 +1157,6 @@ const db = getFirestore(app);
 
 let cart = [];
 const DELIVERY_FEE = 10;
-const ADMIN_PASSWORD = 'microloft';
 
 const urlParams = new URLSearchParams(window.location.search);
 const isAdminMode = urlParams.get('key') === 'snakiesboss';
@@ -918,6 +1165,48 @@ if (isAdminMode) {
   initAdminMode();
 } else {
   initCustomerMode();
+}
+
+function showToast(message, type = 'success') {
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon">${type === 'success' ? '✓' : '⚠'}</div>
+    <div style="color: #000;">${message}</div>
+  `;
+  
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.animation = 'slideInRight 0.3s ease reverse';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+function showNotificationBar(message) {
+  const existingBar = document.getElementById('notificationBar');
+  if (existingBar) existingBar.remove();
+  
+  const bar = document.createElement('div');
+  bar.id = 'notificationBar';
+  bar.className = 'notification-bar';
+  bar.textContent = message;
+  
+  document.body.appendChild(bar);
+  
+  setTimeout(() => {
+    bar.classList.add('hiding');
+    setTimeout(() => bar.remove(), 300);
+  }, 4000);
+}
+
+function saveCart() {
+  localStorage.setItem('snakiesCart', JSON.stringify(cart));
+}
+
+function loadCart() {
+  const saved = localStorage.getItem('snakiesCart');
+  cart = saved ? JSON.parse(saved) : [];
 }
 
 function initCustomerMode() {
@@ -934,7 +1223,6 @@ async function checkOperationsStatus() {
     showClosedOverlay();
   }
   
-  // Listen for operations status changes
   onSnapshot(doc(db, 'settings', 'operations'), (doc) => {
     if (doc.exists() && doc.data().closed) {
       showClosedOverlay();
@@ -945,7 +1233,6 @@ async function checkOperationsStatus() {
 }
 
 function showClosedOverlay() {
-  // Check if overlay already exists
   if (document.getElementById('closedOverlay')) return;
   
   const overlay = document.createElement('div');
@@ -967,8 +1254,8 @@ function showClosedOverlay() {
     ">
       <div style="text-align: center; padding: 40px;">
         <div style="font-size: 80px; margin-bottom: 24px;">🔒</div>
-        <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px;">We're Closed</h1>
-        <p style="font-size: 18px; color: var(--text-light); max-width: 400px; margin: 0 auto;">
+        <h1 style="font-size: 48px; font-weight: 700; margin-bottom: 16px; letter-spacing: -1px; color: #000;">We're Closed</h1>
+        <p style="font-size: 18px; color: #666; max-width: 400px; margin: 0 auto;">
           Thanks for your interest! We're currently closed for the day. Please check back during operating hours.
         </p>
         <div style="margin-top: 32px; padding: 16px 24px; background: #fff3e0; border-radius: 12px; display: inline-block;">
@@ -980,8 +1267,6 @@ function showClosedOverlay() {
   `;
   
   document.body.appendChild(overlay);
-  
-  // Disable scrolling
   document.body.style.overflow = 'hidden';
 }
 
@@ -990,7 +1275,7 @@ function hideClosedOverlay() {
   if (overlay) {
     overlay.remove();
     document.body.style.overflow = 'auto';
-    showToast('We\'re now open! 🎉', 'success');
+    showNotificationBar('We\'re now open! 🎉');
   }
 }
 
@@ -1022,7 +1307,7 @@ function renderCustomerApp() {
         <h2 class="section-title">Our Menu</h2>
         <div class="product-grid">
           <div class="product-card" onclick="window.addToCart('Classic Lemonade', 20)">
-            <img src="https://images.unsplash.com/photo-1524594154908-edd23d6e8a8b?w=400" alt="Classic Lemonade" class="product-image">
+            <img src="https://images.unsplash.com/photo-1546173159-315724a31696?w=400" alt="Classic Lemonade" class="product-image">
             <div class="product-info">
               <div class="product-name">Classic Lemonade</div>
               <div class="product-desc">Freshly squeezed lemons with the perfect balance of sweet and tangy</div>
@@ -1034,7 +1319,7 @@ function renderCustomerApp() {
           </div>
 
           <div class="product-card" onclick="window.addToCart('Iced Lemonade', 30)">
-            <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=400" alt="Iced Lemonade" class="product-image">
+            <img src="https://images.unsplash.com/photo-1546173159-315724a31696?w=400" alt="Iced Lemonade" class="product-image">
             <div class="product-info">
               <div class="product-name">Iced Lemonade</div>
               <div class="product-desc">Cool and refreshing lemonade served with ice, perfect for hot days</div>
@@ -1046,7 +1331,7 @@ function renderCustomerApp() {
           </div>
 
           <div class="product-card" onclick="window.addToCart('Mint Lemonade', 35)">
-            <img src="https://images.unsplash.com/photo-1622597467836-f3285f2131b8?w=400" alt="Mint Lemonade" class="product-image">
+            <img src="https://images.unsplash.com/photo-1546173159-315724a31696?w=400" alt="Mint Lemonade" class="product-image">
             <div class="product-info">
               <div class="product-name">Mint Lemonade</div>
               <div class="product-desc">Fresh mint leaves blended with zesty lemon for a refreshing twist</div>
@@ -1081,12 +1366,16 @@ function renderCustomerApp() {
     <div class="modal-overlay" id="cartModal">
       <div class="modal">
         <div class="modal-header">
-          <div class="modal-title">Your Cart</div>
+          <div id="modalTabs" class="modal-tabs">
+            <div class="modal-tab active" onclick="window.switchTab('cart')">Your Cart</div>
+            <div class="modal-tab" id="orderTab" style="display: none;" onclick="window.switchTab('order')">Order Details</div>
+          </div>
           <button class="close-btn" onclick="window.closeCart()">×</button>
         </div>
         <div class="modal-body">
-          <div id="cartItems"></div>
-          <div id="cartSummary" style="display: none;">
+          <div id="cartView">
+            <div id="cartItems"></div>
+            <div id="cartSummary" style="display: none;">
             <div class="cart-summary">
               <div class="summary-row">
                 <span>Subtotal</span>
@@ -1129,8 +1418,19 @@ function renderCustomerApp() {
                 <input id="notes" type="text" placeholder="e.g., Ring the bell twice">
               </div>
 
-              <button type="submit" class="primary-btn">Place Order</button>
+              <button type="submit" class="primary-btn">
+                <span style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                  <span>🛍️</span>
+                  <span>Place Order</span>
+                </span>
+              </button>
+              <button type="button" class="secondary-btn" onclick="window.closeCart()">Cancel</button>
             </form>
+          </div>
+          </div>
+          
+          <div id="orderView" style="display: none;">
+            <div id="orderDetails"></div>
           </div>
         </div>
       </div>
@@ -1138,258 +1438,6 @@ function renderCustomerApp() {
   `;
   
   updateCart();
-}
-
-function initAdminMode() {
-  const sessionAuth = sessionStorage.getItem('adminAuth');
-  if (sessionAuth === 'true') {
-    renderAdminPanel();
-    startAdminLiveUpdates();
-  } else {
-    renderAdminLogin();
-  }
-}
-
-function renderAdminLogin() {
-  document.getElementById('app').innerHTML = `
-    <div class="modal-overlay active">
-      <div class="modal admin-login">
-        <div class="modal-header">
-          <h2>Admin Access</h2>
-        </div>
-        <div class="modal-body">
-          <p>Enter the admin password to continue</p>
-          <form onsubmit="window.verifyAdminPassword(event)">
-            <div class="form-group">
-              <label for="adminPassword">Password</label>
-              <input id="adminPassword" type="password" placeholder="Enter password" required autofocus>
-            </div>
-            <button type="submit" class="primary-btn">Unlock Admin Panel</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  `;
-}
-
-window.verifyAdminPassword = function(e) {
-  e.preventDefault();
-  const password = document.getElementById('adminPassword').value;
-  
-  if (password === ADMIN_PASSWORD) {
-    sessionStorage.setItem('adminAuth', 'true');
-    showToast('Welcome, Admin! 👑', 'success');
-    renderAdminPanel();
-    startAdminLiveUpdates();
-  } else {
-    showToast('Incorrect password!', 'error');
-    document.getElementById('adminPassword').value = '';
-  }
-}
-
-async function renderAdminPanel() {
-  const settingsSnap = await getDoc(doc(db, 'settings', 'operations'));
-  const isClosed = settingsSnap.exists() ? settingsSnap.data().closed : false;
-  
-  document.getElementById('app').innerHTML = `
-    <div class="admin-header">
-      <div class="container">
-        <div class="admin-title">Admin Dashboard</div>
-        <div class="admin-subtitle">Manage orders and operations in real-time</div>
-        <div class="admin-actions">
-          <button onclick="window.loadAdminData()" class="admin-btn">🔄 Refresh</button>
-          <button id="closeBtn" onclick="${isClosed ? 'window.reopenOperations()' : 'window.closeOperations()'}" class="admin-btn">
-            ${isClosed ? '✅ Operations Closed' : '🔒 Close Operations'}
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-value" id="totalOrders">0</div>
-          <div class="stat-label">Total Orders</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="pendingOrders">0</div>
-          <div class="stat-label">Pending</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value">₹<span id="totalRevenue">0</span></div>
-          <div class="stat-label">Revenue</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="completedOrders">0</div>
-          <div class="stat-label">Completed</div>
-        </div>
-      </div>
-
-      <h2 class="section-title">All Orders</h2>
-      <div id="allOrders"></div>
-
-      <div style="margin-top: 40px;">
-        <button onclick="window.clearAllOrders()" class="primary-btn" style="background: var(--error);">🗑️ Clear All Orders</button>
-      </div>
-    </div>
-
-    <footer>
-      <div class="container">
-        Made with ❤️ by Abhinav & Team
-      </div>
-    </footer>
-  `;
-  
-  loadAdminData();
-}
-
-async function startAdminLiveUpdates() {
-  const ordersQuery = query(collection(db, 'orders'), orderBy('orderTime', 'desc'));
-  onSnapshot(ordersQuery, (snapshot) => {
-    snapshot.docChanges().forEach((change) => {
-      if (change.type === 'added') {
-        playNotificationSound();
-        showToast('🎉 New order received!', 'success');
-      }
-    });
-    loadAdminData();
-  });
-}
-
-function playNotificationSound() {
-  try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.frequency.value = 800;
-    osc.type = 'sine';
-    gain.gain.setValueAtTime(0.3, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
-    osc.start(ctx.currentTime);
-    osc.stop(ctx.currentTime + 0.3);
-  } catch (e) {}
-}
-
-window.loadAdminData = async function() {
-  const querySnapshot = await getDocs(collection(db, 'orders'));
-  const allOrders = [];
-  
-  querySnapshot.forEach((doc) => {
-    allOrders.push({ id: doc.id, ...doc.data() });
-  });
-  
-  const totalOrders = allOrders.length;
-  const pendingOrders = allOrders.filter(o => o.status === 'pending').length;
-  const completedOrders = allOrders.filter(o => o.status === 'completed').length;
-  const totalRevenue = allOrders.filter(o => o.status === 'completed').reduce((sum, o) => sum + o.total, 0);
-  
-  document.getElementById('totalOrders').textContent = totalOrders;
-  document.getElementById('pendingOrders').textContent = pendingOrders;
-  document.getElementById('completedOrders').textContent = completedOrders;
-  document.getElementById('totalRevenue').textContent = totalRevenue;
-  
-  renderAllOrders(allOrders);
-}
-
-function renderAllOrders(orders) {
-  const container = document.getElementById('allOrders');
-  if (!container) return;
-  
-  if (orders.length === 0) {
-    container.innerHTML = `
-      <div class="cart-empty">
-        <div class="cart-empty-icon">📦</div>
-        <h3>No orders yet</h3>
-        <p>Orders will appear here once customers place them</p>
-      </div>
-    `;
-    return;
-  }
-  
-  orders.sort((a, b) => b.orderTime - a.orderTime);
-  
-  container.innerHTML = orders.map((order) => `
-    <div class="order-card">
-      <div class="order-header">
-        <div>
-          <div class="order-id">Order #${order.id.substring(0, 8)}</div>
-          <div class="order-time">${order.timestampDisplay}</div>
-        </div>
-        <div class="order-status ${order.status}">${order.status === 'pending' ? 'Pending' : 'Completed'}</div>
-      </div>
-      
-      <div class="order-details">
-        <div class="detail-row">
-          <span class="detail-label">Customer</span>
-          <span>Flat ${order.flat}, Block ${order.block}</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-label">Phone</span>
-          <span>${order.phone}</span>
-        </div>
-        ${order.notes ? `
-        <div class="detail-row">
-          <span class="detail-label">Instructions</span>
-          <span>${order.notes}</span>
-        </div>
-        ` : ''}
-        <div class="detail-row">
-          <span class="detail-label">Items</span>
-          <span>${order.items.map(i => `${i.name} x${i.qty}`).join(', ')}</span>
-        </div>
-        <div class="detail-row" style="font-weight: 600;">
-          <span>Total</span>
-          <span>₹${order.total}</span>
-        </div>
-      </div>
-      
-      <div class="order-actions">
-        ${order.status === 'pending' ? 
-          `<button onclick="window.updateOrderStatus('${order.id}', 'completed')" class="complete-btn">✓ Mark Complete</button>` :
-          `<button onclick="window.updateOrderStatus('${order.id}', 'pending')" class="complete-btn" style="background: #f57c00;">⏳ Mark Pending</button>`
-        }
-        <button onclick="window.deleteOrder('${order.id}')" class="delete-btn">Delete</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-window.updateOrderStatus = async function(orderId, newStatus) {
-  await updateDoc(doc(db, 'orders', orderId), { status: newStatus });
-  showToast(`Order marked as ${newStatus}`, 'success');
-}
-
-window.deleteOrder = async function(orderId) {
-  if (!confirm('Delete this order?')) return;
-  await deleteDoc(doc(db, 'orders', orderId));
-  showToast('Order deleted', 'success');
-}
-
-window.clearAllOrders = async function() {
-  if (!confirm('Delete ALL orders? This cannot be undone!')) return;
-  const querySnapshot = await getDocs(collection(db, 'orders'));
-  await Promise.all(querySnapshot.docs.map(doc => deleteDoc(doc.ref)));
-  showToast('All orders cleared', 'success');
-}
-
-window.closeOperations = async function() {
-  if (!confirm('Close operations for the day?')) return;
-  await setDoc(doc(db, 'settings', 'operations'), { closed: true });
-  showToast('Operations closed!', 'success');
-  const btn = document.getElementById('closeBtn');
-  btn.textContent = '✅ Operations Closed';
-  btn.onclick = window.reopenOperations;
-}
-
-window.reopenOperations = async function() {
-  if (!confirm('Reopen operations?')) return;
-  await setDoc(doc(db, 'settings', 'operations'), { closed: false });
-  showToast('Operations reopened!', 'success');
-  const btn = document.getElementById('closeBtn');
-  btn.textContent = '🔒 Close Operations';
-  btn.onclick = window.closeOperations;
 }
 
 window.addToCart = function(name, price) {
@@ -1520,52 +1568,380 @@ window.checkout = async function(e) {
     const docRef = await addDoc(collection(db, 'orders'), order);
     localStorage.setItem('lastOrderId', docRef.id);
     
+    const orderTab = document.getElementById('orderTab');
+    orderTab.style.display = 'block';
+    
+    const orderDetailsDiv = document.getElementById('orderDetails');
+    orderDetailsDiv.innerHTML = `
+      <div class="order-success">
+        <div class="order-success-icon">🎉</div>
+        <h3>Order Placed Successfully!</h3>
+        <p>Your fresh lemonade is on the way</p>
+        
+        <div class="order-info-card">
+          <div class="order-info-row">
+            <span class="order-info-label">Order ID</span>
+            <span class="order-info-value">#${docRef.id.substring(0, 8)}</span>
+          </div>
+          <div class="order-info-row">
+            <span class="order-info-label">Delivery Address</span>
+            <span class="order-info-value">Flat ${order.flat}, Block ${order.block}</span>
+          </div>
+          <div class="order-info-row">
+            <span class="order-info-label">Phone</span>
+            <span class="order-info-value">${order.phone}</span>
+          </div>
+          <div class="order-info-row">
+            <span class="order-info-label">Items</span>
+            <span class="order-info-value">${order.items.map(i => `${i.name} x${i.qty}`).join(', ')}</span>
+          </div>
+          <div class="order-info-row">
+            <span class="order-info-label">Total</span>
+            <span class="order-info-value">₹${order.total}</span>
+          </div>
+          <div class="order-info-row">
+            <span class="order-info-label">Status</span>
+            <span class="order-info-value" style="color: var(--primary);">Pending</span>
+          </div>
+        </div>
+        
+        <button onclick="window.closeCart(); window.location.reload();" class="primary-btn">
+          Continue Shopping
+        </button>
+      </div>
+    `;
+    
     cart = [];
     saveCart();
     updateCart();
     e.target.reset();
     
-    showToast("Order placed successfully! 🎉", 'success');
-    setTimeout(() => closeCart(), 1500);
+    switchTab('order');
+    showNotificationBar('Order placed successfully! 🎉');
   } catch (error) {
+    console.error(error);
     showToast("Error placing order. Please try again.", 'error');
-  }
-}
-
-function saveCart() {
-  localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-function loadCart() {
-  const savedCart = localStorage.getItem('cart');
-  if (savedCart) {
-    cart = JSON.parse(savedCart);
   }
 }
 
 window.openCart = function() {
   document.getElementById('cartModal').classList.add('active');
+  if (cart.length > 0) {
+    switchTab('cart');
+    document.getElementById('orderTab').style.display = 'none';
+  }
 }
 
 window.closeCart = function() {
   document.getElementById('cartModal').classList.remove('active');
 }
 
-function showToast(message, type = 'success') {
-  const toast = document.createElement('div');
-  toast.className = `toast ${type}`;
-  toast.innerHTML = `
-    <div class="toast-icon">${type === 'success' ? '✓' : '⚠'}</div>
-    <div>${message}</div>
+window.switchTab = function(tab) {
+  const cartView = document.getElementById('cartView');
+  const orderView = document.getElementById('orderView');
+  const tabs = document.querySelectorAll('.modal-tab');
+  
+  tabs.forEach(t => t.classList.remove('active'));
+  
+  if (tab === 'cart') {
+    cartView.style.display = 'block';
+    orderView.style.display = 'none';
+    tabs[0].classList.add('active');
+  } else {
+    cartView.style.display = 'none';
+    orderView.style.display = 'block';
+    tabs[1].classList.add('active');
+  }
+}
+
+function initAdminMode() {
+  const sessionAuth = sessionStorage.getItem('adminAuth');
+  if (sessionAuth === 'true') {
+    renderAdminPanel();
+    startAdminLiveUpdates();
+  } else {
+    renderAdminLogin();
+  }
+}
+
+function renderAdminLogin() {
+  document.getElementById('app').innerHTML = `
+    <div class="modal-overlay active">
+      <div class="modal admin-login">
+        <div class="modal-header">
+          <h2>Admin Access</h2>
+        </div>
+        <div class="modal-body">
+          <p>Enter the admin password to continue</p>
+          <form onsubmit="window.verifyAdminPassword(event)">
+            <div class="form-group">
+              <label for="adminPassword">Password</label>
+              <input id="adminPassword" type="password" placeholder="Enter password" required autofocus>
+            </div>
+            <button type="submit" class="primary-btn">Unlock Admin Panel</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function simpleHash(str) {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return hash.toString();
+}
+
+window.verifyAdminPassword = async function(e) {
+  e.preventDefault();
+  const password = document.getElementById('adminPassword').value;
+  
+  try {
+    const docSnap = await getDoc(doc(db, 'settings', 'adminPassword'));
+    
+    if (!docSnap.exists()) {
+      showToast('Admin password not configured!', 'error');
+      return;
+    }
+    
+    const storedHash = docSnap.data().hash;
+    const inputHash = simpleHash(password);
+    
+    if (inputHash === storedHash) {
+      sessionStorage.setItem('adminAuth', 'true');
+      showToast('Welcome, Admin! 👑', 'success');
+      renderAdminPanel();
+      startAdminLiveUpdates();
+    } else {
+      showToast('Incorrect password!', 'error');
+      document.getElementById('adminPassword').value = '';
+    }
+  } catch (error) {
+    console.error('Error verifying password:', error);
+    showToast('Error accessing admin panel', 'error');
+  }
+}
+
+async function renderAdminPanel() {
+  const settingsSnap = await getDoc(doc(db, 'settings', 'operations'));
+  const isClosed = settingsSnap.exists() ? settingsSnap.data().closed : false;
+  
+  document.getElementById('app').innerHTML = `
+    <div class="admin-header">
+      <div class="container">
+        <div class="admin-title">⚡ Admin Dashboard</div>
+        <div class="admin-subtitle">Real-time order management and analytics</div>
+        <div class="admin-actions">
+          <button onclick="window.loadAdminData()" class="admin-btn">
+            <span>🔄</span>
+            <span>Refresh Data</span>
+          </button>
+          <button id="closeBtn" onclick="${isClosed ? 'window.reopenOperations()' : 'window.closeOperations()'}" class="admin-btn">
+            <span>${isClosed ? '✅' : '🔒'}</span>
+            <span>${isClosed ? 'Reopen Operations' : 'Close Operations'}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="totalOrders">0</div>
+          <div class="stat-label">Total Orders</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="pendingOrders">0</div>
+          <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">₹<span id="totalRevenue">0</span></div>
+          <div class="stat-label">Revenue</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="completedOrders">0</div>
+          <div class="stat-label">Completed</div>
+        </div>
+      </div>
+
+      <h2 class="section-title">📦 Live Orders</h2>
+      <div id="allOrders"></div>
+
+      <div style="margin-top: 60px; text-align: center;">
+        <button onclick="window.clearAllOrders()" class="primary-btn" style="max-width: 300px; background: linear-gradient(135deg, var(--error), #cc0044);">
+          <span style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>🗑️</span>
+            <span>Clear All Orders</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        Made with ❤️ by Abhinav & Team
+      </div>
+    </footer>
   `;
   
-  document.body.appendChild(toast);
-  
-  setTimeout(() => {
-    toast.style.animation = 'slideInRight 0.3s ease reverse';
-    setTimeout(() => toast.remove(), 300);
-  }, 3000);
+  loadAdminData();
 }
+
+async function startAdminLiveUpdates() {
+  const ordersQuery = query(collection(db, 'orders'), orderBy('orderTime', 'desc'));
+  onSnapshot(ordersQuery, (snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+      if (change.type === 'added') {
+        playNotificationSound();
+        showNotificationBar('🎉 New order received!');
+      }
+    });
+    loadAdminData();
+  });
+}
+
+function playNotificationSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.frequency.value = 800;
+    osc.type = 'sine';
+    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+    osc.start(ctx.currentTime);
+    osc.stop(ctx.currentTime + 0.3);
+  } catch (e) {
+    console.error('Audio error:', e);
+  }
+}
+
+window.loadAdminData = async function() {
+  const querySnapshot = await getDocs(collection(db, 'orders'));
+  const allOrders = [];
+  
+  querySnapshot.forEach((doc) => {
+    allOrders.push({ id: doc.id, ...doc.data() });
+  });
+  
+  const totalOrders = allOrders.length;
+  const pendingOrders = allOrders.filter(o => o.status === 'pending').length;
+  const completedOrders = allOrders.filter(o => o.status === 'completed').length;
+  const totalRevenue = allOrders.filter(o => o.status === 'completed').reduce((sum, o) => sum + o.total, 0);
+  
+  document.getElementById('totalOrders').textContent = totalOrders;
+  document.getElementById('pendingOrders').textContent = pendingOrders;
+  document.getElementById('completedOrders').textContent = completedOrders;
+  document.getElementById('totalRevenue').textContent = totalRevenue;
+  
+  renderAllOrders(allOrders);
+}
+
+function renderAllOrders(orders) {
+  const container = document.getElementById('allOrders');
+  if (!container) return;
+  
+  if (orders.length === 0) {
+    container.innerHTML = `
+      <div class="cart-empty" style="padding: 80px 20px;">
+        <div class="cart-empty-icon" style="font-size: 100px;">📦</div>
+        <h3 style="font-size: 24px; margin-bottom: 12px; color: #000;">No orders yet</h3>
+        <p style="font-size: 16px; color: #666;">Orders will appear here once customers place them</p>
+      </div>
+    `;
+    return;
+  }
+  
+  orders.sort((a, b) => b.orderTime - a.orderTime);
+  
+  container.innerHTML = orders.map((order) => `
+    <div class="order-card">
+      <div class="order-header">
+        <div>
+          <div class="order-id">#${order.id.substring(0, 8).toUpperCase()}</div>
+          <div class="order-time">${order.timestampDisplay}</div>
+        </div>
+        <div class="order-status ${order.status}">${order.status === 'pending' ? '⏳ Pending' : '✅ Completed'}</div>
+      </div>
+      
+      <div class="order-details">
+        <div class="detail-row">
+          <span class="detail-label">📍 Delivery Address</span>
+          <span class="detail-value">Flat ${order.flat}, Block ${order.block}</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">📞 Phone</span>
+          <span class="detail-value">${order.phone}</span>
+        </div>
+        ${order.notes ? `
+        <div class="detail-row">
+          <span class="detail-label">📝 Instructions</span>
+          <span class="detail-value">${order.notes}</span>
+        </div>
+        ` : ''}
+        <div class="detail-row">
+          <span class="detail-label">🛍️ Items</span>
+          <span class="detail-value">${order.items.map(i => `${i.name} ×${i.qty}`).join(', ')}</span>
+        </div>
+        <div class="detail-row" style="font-weight: 700; font-size: 16px; padding-top: 12px; border-top: 2px solid #f0f0f0; margin-top: 8px;">
+          <span class="detail-label">💰 Total</span>
+          <span class="detail-value" style="color: #667eea;">₹${order.total}</span>
+        </div>
+      </div>
+      
+      <div class="order-actions">
+        ${order.status === 'pending' ? 
+          `<button onclick="window.updateOrderStatus('${order.id}', 'completed')" class="complete-btn">✓ Complete</button>` :
+          `<button onclick="window.updateOrderStatus('${order.id}', 'pending')" class="complete-btn" style="background: linear-gradient(135deg, #ffa726, #fb8c00);">⏳ Reopen</button>`
+        }
+        <button onclick="window.deleteOrder('${order.id}')" class="delete-btn">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+window.updateOrderStatus = async function(orderId, newStatus) {
+  await updateDoc(doc(db, 'orders', orderId), { status: newStatus });
+  showNotificationBar(`Order ${newStatus === 'completed' ? 'completed' : 'reopened'} successfully!`);
+}
+
+window.deleteOrder = async function(orderId) {
+  if (!confirm('Delete this order?')) return;
+  await deleteDoc(doc(db, 'orders', orderId));
+  showNotificationBar('Order deleted successfully');
+}
+
+window.clearAllOrders = async function() {
+  if (!confirm('⚠️ Delete ALL orders? This cannot be undone!')) return;
+  const querySnapshot = await getDocs(collection(db, 'orders'));
+  await Promise.all(querySnapshot.docs.map(doc => deleteDoc(doc.ref)));
+  showNotificationBar('All orders cleared');
+}
+
+window.closeOperations = async function() {
+  if (!confirm('Close operations for the day?')) return;
+  await setDoc(doc(db, 'settings', 'operations'), { closed: true });
+  showNotificationBar('Operations closed!');
+  const btn = document.getElementById('closeBtn');
+  btn.innerHTML = '<span>✅</span><span>Reopen Operations</span>';
+  btn.onclick = window.reopenOperations;
+}
+
+window.reopenOperations = async function() {
+  if (!confirm('Reopen operations?')) return;
+  await setDoc(doc(db, 'settings', 'operations'), { closed: false });
+  showNotificationBar('Operations reopened!');
+  const btn = document.getElementById('closeBtn');
+  btn.innerHTML = '<span>🔒</span><span>Close Operations</span>';
+  btn.onclick = window.closeOperations;
+}
+
 </script>
 
 </body>
